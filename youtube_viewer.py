@@ -36,6 +36,8 @@ from requests.exceptions import RequestException
 from tabulate import tabulate
 from undetected_chromedriver.patcher import Patcher
 
+import proxy_check
+import scrapetube
 from youtubeviewer import website
 from youtubeviewer.basics import *
 from youtubeviewer.config import create_config
@@ -209,8 +211,26 @@ def create_html(text_dict):
     console.insert(0, html)
 
 
+youtube_base_url = 'https://www.youtube.com/watch?v='
+all_channel_videos = list(scrapetube.get_channel("UCxjT5pI4bW6Vpjt3_pM2z-g", content_type="videos"))
+# all_channel_videos = all_channel_videos + list(
+#     scrapetube.get_channel("UCxjT5pI4bW6Vpjt3_pM2z-g", content_type="shorts"))
+# all_channel_videos = all_channel_videos + list(scrapetube.get_channel(channel_url="https://www.youtube.com"
+#                                                                                   "/@aceofface4139",
+#                                                                       content_type="videos"))
+
+
+def get_channel_video_urls():
+    with open("urls.txt", "w") as urls_file:
+        for video in all_channel_videos:
+            urls_file.write(f'\n{youtube_base_url + video["videoId"]}')
+        urls_file.close()
+
+
 def detect_file_change():
     global hash_urls, hash_queries, urls, queries
+
+    get_channel_video_urls()
 
     if hash_urls != get_hash("urls.txt"):
         hash_urls = get_hash("urls.txt")
@@ -226,7 +246,7 @@ def detect_file_change():
 def direct_or_search(position):
     keyword = None
     video_title = None
-    if position % 2:
+    if True:
         try:
             method = 1
             url = choice(urls)
@@ -803,6 +823,12 @@ def get_proxy_list():
         else:
             if proxy_api:
                 proxy_list = scrape_api(filename)
+                proxy_check.backup()
+                proxy_check.proxy_list = list(set(filter(None, proxy_list)))
+                proxy_check.total_proxies = len(proxy_check.proxy_list)
+                proxy_check.threads = 500
+                proxy_check.main()
+                proxy_list = load_proxy("GoodProxy.txt")
             else:
                 proxy_list = load_proxy(filename)
 
@@ -815,10 +841,12 @@ def get_proxy_list():
 def stop_server(immediate=False):
     if not immediate:
         print('Allowing a maximum of 15 minutes to finish all the running drivers...')
-        for _ in range(180):
+        while 'state=running' in str(futures[1:-1]):
             sleep(5)
-            if 'state=running' not in str(futures[1:-1]):
-                break
+        # for _ in range(180):
+        #     sleep(5)
+        #     if 'state=running' not in str(futures[1:-1]):
+        #         break
 
     if api:
         for _ in range(10):

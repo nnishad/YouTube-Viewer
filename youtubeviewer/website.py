@@ -158,4 +158,4 @@ def start_server(host, port, debug=False):
 
 
 if __name__ == '__main__':
-    start_server(host='0.0.0.0', port=5000, debug=True)
+    start_server(host='0.0.0.0', port=5005, debug=True)
