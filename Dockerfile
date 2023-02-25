@@ -1,6 +1,6 @@
 FROM joyzoursky/python-chromedriver
 
-WORKDIR /docker-work-space
+#WORKDIR /docker-work-space
 
 # set display port to avoid crash
 #ENV DISPLAY=:99

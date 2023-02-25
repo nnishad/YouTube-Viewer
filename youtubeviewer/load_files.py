@@ -30,7 +30,7 @@ from .colors import *
 def load_url():
     print(bcolors.WARNING + 'Loading urls...' + bcolors.ENDC)
 
-    with open('urls.txt', encoding="utf-8") as fh:
+    with open('/YouTube-Viewer/urls.txt', encoding="utf-8") as fh:
         links = [x.strip() for x in fh if x.strip() != '']
 
     print(bcolors.OKGREEN +
@@ -44,7 +44,7 @@ def load_url():
 def load_search():
     print(bcolors.WARNING + 'Loading queries...' + bcolors.ENDC)
 
-    with open('search.txt', encoding="utf-8") as fh:
+    with open('/YouTube-Viewer/search.txt', encoding="utf-8") as fh:
         search = [[y.strip() for y in x.strip().split('::::')]
                   for x in fh if x.strip() != '' and '::::' in x]
 

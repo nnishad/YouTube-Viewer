@@ -822,7 +822,7 @@ def get_proxy_list():
                 proxy_check.total_proxies = len(proxy_check.proxy_list)
                 proxy_check.threads = 500
                 proxy_check.main()
-                proxy_list = load_proxy("GoodProxy.txt")
+                proxy_list = load_proxy("/YouTube-Viewer/GoodProxy.txt")
             else:
                 proxy_list = load_proxy(filename)
 
