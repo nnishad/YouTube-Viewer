@@ -214,6 +214,7 @@ def create_html(text_dict):
 youtube_base_url = 'https://www.youtube.com/watch?v='
 all_channel_videos = list(scrapetube.get_channel("UCxjT5pI4bW6Vpjt3_pM2z-g", content_type="videos"))
 
+
 def get_channel_video_urls():
     with open("urls.txt", "w") as urls_file:
         for video in all_channel_videos:
@@ -822,7 +823,7 @@ def get_proxy_list():
                 proxy_check.total_proxies = len(proxy_check.proxy_list)
                 proxy_check.threads = 500
                 proxy_check.main()
-                proxy_list = load_proxy("/YouTube-Viewer/GoodProxy.txt")
+                proxy_list = load_proxy("GoodProxy.txt")
             else:
                 proxy_list = load_proxy(filename)
 
