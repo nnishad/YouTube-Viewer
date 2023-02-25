@@ -27,7 +27,7 @@ import logging
 import re
 import textwrap
 from concurrent.futures import ThreadPoolExecutor, wait
-from time import gmtime, sleep, strftime, time
+from time import gmtime, strftime, time
 
 import psutil
 from fake_headers import Headers, browsers
@@ -213,12 +213,6 @@ def create_html(text_dict):
 
 youtube_base_url = 'https://www.youtube.com/watch?v='
 all_channel_videos = list(scrapetube.get_channel("UCxjT5pI4bW6Vpjt3_pM2z-g", content_type="videos"))
-# all_channel_videos = all_channel_videos + list(
-#     scrapetube.get_channel("UCxjT5pI4bW6Vpjt3_pM2z-g", content_type="shorts"))
-# all_channel_videos = all_channel_videos + list(scrapetube.get_channel(channel_url="https://www.youtube.com"
-#                                                                                   "/@aceofface4139",
-#                                                                       content_type="videos"))
-
 
 def get_channel_video_urls():
     with open("urls.txt", "w") as urls_file:
