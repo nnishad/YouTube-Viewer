@@ -1,0 +1,24 @@
+﻿{
+  "http_api": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": 5005
+  },
+  "database": true,
+  "views": 5000,
+  "minimum": 85.0,
+  "maximum": 95.0,
+  "proxy": {
+    "category": "f",
+    "proxy_type": false,
+    "filename": "http://localhost:3000/proxy",
+    "authentication": false,
+    "proxy_api": true,
+    "refresh": 0.0
+  },
+  "background": true,
+  "bandwidth": true,
+  "playback_speed": 1,
+  "max_threads": 200,
+  "min_threads": 100
+}
